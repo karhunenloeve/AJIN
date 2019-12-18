@@ -2,4 +2,5 @@ site_name: Ajin
 nav:
     - Home: index.md
     - Clustering: cluster.md
+    - Auxiliary: helper.md
 theme: readthedocs

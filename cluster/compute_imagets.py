@@ -1,17 +1,31 @@
+from typing import Callable
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir) 
+
 import math
-import typing
 import numpy as np
+import os,sys,inspect
+import helper as hp
 
+def ts_gaf_transform(
+        timeseries: np.ndarray,  
+        upper_bound: float = 1.,  
+        lower_bound: float = -1.) -> tuple:
+        """
+        **Compute the Gramian Angular Field of a time series.**
 
-def transform(timeseries: np.ndarray):
-        """  
-        **Compute the Gramian Angular Field of a time series.**  
         The Gramian Angular Field is a bijective transformation of time series data into an image of dimension `n+1`.
         Inserting an `n`-dimensional time series gives an `(n x n)`-dimensional array with the corresponding encoded
-        time series data.  
-        **:param timeseries:** *np.ndarray of time series data.*
-        **:return :**
+        time series data.
+
+        + param **timeseries**: time series data, type `np.ndarray`.
+        + param **upper_bound**: upper bound for scaling, type `float`.
+        + param **lower_bound**: lower bound for scaling, type `float`.
+        + return **tuple**: (GAF, phi, r, scaled-series), type `tuple`.
         """
+
         # Min-Max scaling
         min_ = np.amin(serie)
         max_ = np.amax(serie)
@@ -30,4 +44,4 @@ def transform(timeseries: np.ndarray):
         # GAF Computation (every term of the matrix)
         gaf = tabulate(phi, phi, cos_sum)
 
-        return(gaf, phi, r, scaled_serie)
+        return (gaf, phi, r, scaled_serie)

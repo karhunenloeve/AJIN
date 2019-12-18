@@ -2,18 +2,18 @@ from typing import Callable
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir) 
+sys.path.insert(0, parent_dir)
 
 import math
 import numpy as np
-import os,sys,inspect
+import os, sys, inspect
 import helper as hp
 
+
 def ts_gaf_transform(
-        timeseries: np.ndarray,  
-        upper_bound: float = 1.,  
-        lower_bound: float = -1.) -> tuple:
-        """
+    timeseries: np.ndarray, upper_bound: float = 1.0, lower_bound: float = -1.0
+) -> tuple:
+    """
         **Compute the Gramian Angular Field of a time series.**
 
         The Gramian Angular Field is a bijective transformation of time series data into an image of dimension `n+1`.
@@ -26,22 +26,22 @@ def ts_gaf_transform(
         + return **tuple**: (GAF, phi, r, scaled-series), type `tuple`.
         """
 
-        # Min-Max scaling
-        min_ = np.amin(serie)
-        max_ = np.amax(serie)
-        scaled_serie = (2*serie - max_ - min_)/(max_ - min_)
+    # Min-Max scaling
+    min_ = np.amin(serie)
+    max_ = np.amax(serie)
+    scaled_serie = (2 * serie - max_ - min_) / (max_ - min_)
 
-        # Floating point inaccuracy!
-        scaled_serie = np.where(scaled_serie >= 1., 1., scaled_serie)
-        scaled_serie = np.where(scaled_serie <= -1., -1., scaled_serie)
+    # Floating point inaccuracy!
+    scaled_serie = np.where(scaled_serie >= 1.0, 1.0, scaled_serie)
+    scaled_serie = np.where(scaled_serie <= -1.0, -1.0, scaled_serie)
 
-        # Polar encoding
-        phi = np.arccos(scaled_serie)
+    # Polar encoding
+    phi = np.arccos(scaled_serie)
 
-        # Note! The computation of r is not necessary
-        r = np.linspace(0, 1, len(scaled_serie))
+    # Note! The computation of r is not necessary
+    r = np.linspace(0, 1, len(scaled_serie))
 
-        # GAF Computation (every term of the matrix)
-        gaf = tabulate(phi, phi, cos_sum)
+    # GAF Computation (every term of the matrix)
+    gaf = tabulate(phi, phi, cos_sum)
 
-        return (gaf, phi, r, scaled_serie)
+    return (gaf, phi, r, scaled_serie)

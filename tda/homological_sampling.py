@@ -1,5 +1,6 @@
 import numpy as np
 import math as mth
+import tadasets
 from typing import List, Set, Dict, Tuple, Optional
 
 def sample_dsphere(
@@ -129,3 +130,27 @@ def sample_dtorus_cursed(
 
 	except IndexError:
 		print("The index of your radii list is out of range.")
+
+
+def sample_torus(
+	dimension: int,
+	amount: int,
+	radii: list) -> np.ndarray:
+	"""
+        **Sample from a d-torus.**
+
+		The function is named cursed, because the curse of dimensionality leads to an exponential grouth in time.
+		The samples are drawn and then rejected if the lie on the algebraic variety of the torus. Unfortunately 
+		the curse of dimensionality makes the computation time exponential in the number of dimensions. Therefore
+		this is just a prototype for low dimensional sampling
+
+        + param **dimension**: as dimension of the embedding space, type `int`.
+        + param **amount**: amount of sample points, type `float`.
+        + param **radii**: radii of the torical spheres, type `list`.
+        + return **list**: data points, type `list`.
+    """
+    return tadasets.torus(n=2000, c=2, a=1, ambient=200, noise=0.2)
+
+swiss_roll = tadasets.swiss_roll(n=2000, r=4, ambient=10, noise=1.2)
+dsphere = tadasets.dsphere(n=1000, d=12, r=3.14, ambient=14, noise=0.14)
+infty_sign = tadasets.infty_sign(n=3000, noise=0.1)

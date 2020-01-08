@@ -24,7 +24,7 @@ def ts_gaf_transform(
         + param **upper_bound**: upper bound for scaling, type `float`.
         + param **lower_bound**: lower bound for scaling, type `float`.
         + return **tuple**: (GAF, phi, r, scaled-series), type `tuple`.
-        """
+    """
 
     # Min-Max scaling
     min_ = np.amin(serie)

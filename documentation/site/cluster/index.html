@@ -5,25 +5,25 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="None">
   
-  <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Home - Ajin</title>
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Clustering - Ajin</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Home";
-    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_name = "Clustering";
+    var mkdocs_page_input_path = "cluster.md";
     var mkdocs_page_url = null;
   </script>
   
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -36,9 +36,9 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> Ajin</a>
+        <a href=".." class="icon icon-home"> Ajin</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -48,15 +48,23 @@
 	<ul class="current">
 	  
           
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
-    <a class="current" href=".">Home</a>
+    <a class="current" href="./">Clustering</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#siml">ðSIML</a></li>
+    <li class="toctree-l2"><a href="#compute_imagets">compute_imagets</a></li>
     
-
-    <li class="toctree-l2"><a href="#requirements">Requirements</a></li>
+        <ul>
+        
+            <li><a class="toctree-l3" href="#ts_gaf_transform">ts_gaf_transform</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -64,17 +72,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="cluster/">Clustering</a>
+    <a class="" href="../tda/">TDA</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="tda/">TDA</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="helper/">Auxiliary</a>
+    <a class="" href="../helper/">Auxiliary</a>
 	    </li>
           
         </ul>
@@ -87,7 +90,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">Ajin</a>
+        <a href="..">Ajin</a>
       </nav>
 
       
@@ -95,11 +98,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
     
-    <li>Home</li>
+    <li>Clustering</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -109,36 +112,21 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="siml">ðSIML</h3>
-<h3 id="requirements">Requirements</h3>
-<p>For this package we use the <code>gcc</code> compiler. Please install <code>gcc</code> using one of the following commands for the linux distributions <em>Arch, Solus4</em> or <em>Ubuntu</em>:</p>
-<pre><code class="bash"> # Archlinux
- sudo pacman -S gcc
-
- # Solus4
- sudo eopkg install gcc
- # These are the requirements to run gcc for Solus4
- sudo eopkg install -c system.devel
-
- # Ubuntu
- sudo apt update
- sudo apt install build-essential
- sudo apt-get install python3-dev
- sudo apt-get install manpages-dev
- gcc --version
+                <h1 id="compute_imagets">compute_imagets</h1>
+<h2 id="ts_gaf_transform">ts_gaf_transform</h2>
+<pre><code class="python">ts_gaf_transform(timeseries:numpy.ndarray, upper_bound:float=1.0, lower_bound:float=-1.0) -&gt; tuple
 </code></pre>
 
-<p>Some packages are way easier to install using Anaconda. For the installation on several linux distributions please follow <a href="https://docs.anaconda.com/anaconda/install/linux/">this link</a>. Further the installation of our clustering prototype requires some python packages to be installed. We provide a requirements file, but here is a complete list for manual installation using <code>pip3</code> and <code>python 3</code>:</p>
-<pre><code class="bash">  pip3 install pandas
-  pip3 install sklearn
-  # Works only with gcc installed.
-  pip3 install hdbscan
-
-  # Install Gudhi, easiest installation with Anaconda.
-  # Gudhi is a library to compute persistent homology.
-  conda install -c conda-forge gudhi
-  conda install -c conda-forge/label/cf201901 gudhi 
-</code></pre>
+<p><strong>Compute the Gramian Angular Field of a time series.</strong></p>
+<p>The Gramian Angular Field is a bijective transformation of time series data into an image of dimension <code>n+1</code>.
+Inserting an <code>n</code>-dimensional time series gives an <code>(n x n)</code>-dimensional array with the corresponding encoded
+time series data.</p>
+<ul>
+<li>param <strong>timeseries</strong>: time series data, type <code>np.ndarray</code>.</li>
+<li>param <strong>upper_bound</strong>: upper bound for scaling, type <code>float</code>.</li>
+<li>param <strong>lower_bound</strong>: lower bound for scaling, type <code>float</code>.</li>
+<li>return <strong>tuple</strong>: (GAF, phi, r, scaled-series), type <code>tuple</code>.</li>
+</ul>
               
             </div>
           </div>
@@ -146,8 +134,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cluster/" class="btn btn-neutral float-right" title="Clustering">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../tda/" class="btn btn-neutral float-right" title="TDA">Next <span class="icon icon-circle-arrow-right"></span></a>
       
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -173,19 +163,16 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-        <span style="margin-left: 15px"><a href="cluster/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+        <span style="margin-left: 15px"><a href="../tda/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
-    <script>var base_url = '.';</script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.0.4
-Build Date UTC : 2020-01-08 12:35:09
--->

@@ -1,4 +1,3 @@
-[9.36172409e+13 9.36165987e+13]
 # compute_imagets
 
 ## ts_gaf_transform

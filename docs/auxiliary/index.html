@@ -116,7 +116,7 @@
               
                 <h1 id="auxiliary">auxiliary</h1>
 <h2 id="aux_iterative_descent"><strong><em>aux_iterative_descent</em></strong></h2>
-<pre><code class="python">aux_iterative_descent(data:numpy.ndarray, function:Callable) -&gt; numpy.ndarray
+<pre><code class="python">def aux_iterative_descent(data:numpy.ndarray, function:Callable) -&gt; numpy.ndarray
 </code></pre>
 
 <p><strong>Iterative process an <code>np.ndarray</code> of shape <code>(m,n)</code>.</strong></p>
@@ -129,7 +129,7 @@ This function treats the row vectors as time series. Therefore the time series m
 <li>return <strong>proc_data</strong>: all kind of processed data.</li>
 </ul>
 <h2 id="aux_recursive_descent"><strong><em>aux_recursive_descent</em></strong></h2>
-<pre><code class="python">aux_recursive_descent(data:numpy.ndarray, function:Callable)
+<pre><code class="python">def aux_recursive_descent(data:numpy.ndarray, function:Callable)
 </code></pre>
 
 <p><strong>Recursivly process an <code>np.ndarray</code> until the last dimension.</strong></p>

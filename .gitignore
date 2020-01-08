@@ -277,3 +277,4 @@ TSWLatexianTemp*
 
 # Build the docs_build
 _docs_build
+__pycache__

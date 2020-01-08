@@ -1,6 +1,6 @@
-# homological_sampling
+# tda
 
-## sample_dsphere
+## ***sample_dsphere***
 ```python
 def sample_dsphere(dimension: int, amount: int, radius: float = 1) -> np.ndarray
 ```
@@ -17,7 +17,7 @@ with `n` being the number of samples and `d` the number of dimensions.
 + param **radius**: radius of the d-sphere, type `float`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-## sample_dball
+## ***sample_dball***
 ```python
 def sample_dball(dimension: int, amount: int, radius: float = 1) -> np.ndarray
 ```
@@ -35,7 +35,7 @@ and `d` the number of dimensions.
 + param **radius**: radius of the d-sphere, type `float`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-## sample_dtorus_cursed
+## ***sample_dtorus_cursed***
 ```python
 def sample_dtorus_cursed(dimension: int, amount: int, radii: list) -> np.ndarray
 ```

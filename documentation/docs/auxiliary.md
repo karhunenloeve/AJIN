@@ -1,8 +1,8 @@
-# helper
+# auxiliary
 
-## ts_iterative_descent
+## ***aux_iterative_descent***
 ```python
-ts_iterative_descent(data:numpy.ndarray, function:Callable) -> numpy.ndarray
+aux_iterative_descent(data:numpy.ndarray, function:Callable) -> numpy.ndarray
 ```
 
 **Iterative process an `np.ndarray` of shape `(m,n)`.**
@@ -15,9 +15,9 @@ This function treats the row vectors as time series. Therefore the time series m
 + param **function**: callable, type `Callable`.
 + return **proc_data**: all kind of processed data.
 
-## ts_recursive_descent
+## ***aux_recursive_descent***
 ```python
-ts_recursive_descent(data:numpy.ndarray, function:Callable)
+aux_recursive_descent(data:numpy.ndarray, function:Callable)
 ```
 
 **Recursivly process an `np.ndarray` until the last dimension.**

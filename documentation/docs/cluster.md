@@ -1,6 +1,6 @@
-# compute_imagets
+# clustering
 
-## ts_gaf_transform
+## ***ts_gaf_transform***
 ```python
 ts_gaf_transform(timeseries:numpy.ndarray, upper_bound:float=1.0, lower_bound:float=-1.0) -> tuple
 ```

@@ -4,7 +4,7 @@ import numpy as np
 from typing import Callable
 
 
-def ts_iterative_descent(data: np.ndarray, function: Callable) -> np.ndarray:
+def aux_iterative_descent(data: np.ndarray, function: Callable) -> np.ndarray:
     """
         **Iterative process an `np.ndarray` of shape `(m,n)`.**
 
@@ -25,7 +25,7 @@ def ts_iterative_descent(data: np.ndarray, function: Callable) -> np.ndarray:
         print("Wrong size of np.ndarray.")
 
 
-def ts_recursive_descent(data: np.ndarray, function: Callable):
+def aux_recursive_descent(data: np.ndarray, function: Callable):
     """
         **Recursivly process an `np.ndarray` until the last dimension.**
 

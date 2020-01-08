@@ -2,6 +2,6 @@ site_name: Ajin
 nav:
     - Home: index.md
     - Clustering: cluster.md
-    - TDA: tda.md
-    - Auxiliary: helper.md
+    - Topological Data Analysis: tda.md
+    - Auxiliary: auxiliary.md
 theme: readthedocs

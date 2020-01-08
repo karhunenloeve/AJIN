@@ -1,6 +1,6 @@
-### ðSIML
+# Ajin - Welcome!
 
-### Requirements
+# Requirements
 For this package we use the `gcc` compiler. Please install `gcc` using one of the following commands for the linux distributions *Arch, Solus4* or *Ubuntu*:
 ```bash
  # Archlinux

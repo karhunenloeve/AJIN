@@ -1,13 +1,15 @@
-from typing import Callable
+import os
+import sys
+import inspect
+import math
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-import math
 import numpy as np
-import os, sys, inspect
-import helper as hp
+import auxiliary as aux
+from typing import Callable
 
 
 def ts_gaf_transform(

@@ -12,7 +12,7 @@ def persistent_homology(
     display: bool = False,
     tikzplot: bool = False,
     maxEdgeLength: int = 42,
-    maxDimension: int = 5,
+    maxDimension: int = 10,
     maxAlphaSquare: float = 1e12,
     homologyCoeffField: int = 3,
     minPersistence: float = 0,

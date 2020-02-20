@@ -19,12 +19,10 @@ def persistent_homology(
     filtration: str = ["alphaComplex", "vietorisRips", "tangential"],
 ):
     """
-        **Create uniform random sampling of a d-sphere.**
+        **Create persistence diagram.**
 
-        This algorithm generates a certain set of normally distributed random variables.
-        Since the multivariate normal distribution of `(x1, ..., xn)` is rotationally symmetrical about the
-        origin, data can be generated on a sphere. The computation time for this algorithm is `O(n * d)`,
-        with `n` being the number of samples and `d` the number of dimensions.
+        This function computes the persistent homology of a dataset upon a filtration of a chosen
+        simplicial complex. It can be used for plotting or scientific displaying of persistent homology classes.
 
         + param **data**: data, type `np.ndarray`.
         + param **display**: whether or not to plot the persistence diagram using matplotlib, type `bool`.

@@ -12,7 +12,7 @@ import auxiliary as aux
 from typing import Callable
 
 
-def ts_gaf_transform(
+def gramian_angular_field(
     timeseries: np.ndarray, upper_bound: float = 1.0, lower_bound: float = -1.0
 ) -> tuple:
     """

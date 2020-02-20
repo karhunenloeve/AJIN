@@ -190,13 +190,13 @@ def compute_mean_persistence_landscapes(
         for i in range(0, len(splittedLandscape)):
             # Iterate the dict by the current element modulo it's length.
             if smoothen == True:
-                plt.fill(
+                plt.plot(
                     xaxis,
                     gaussian_filter1d(splittedLandscape[i], sigma),
                     colorScheme[keys[i%len(keys)]],
                 )
             else:
-                plt.fill(
+                plt.plot(
                     xaxis,
                     splittedLandscape[i],
                     colorScheme[keys[i%len(keys)]],

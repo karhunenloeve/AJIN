@@ -12,7 +12,7 @@ import persistenceStatistics as ps
 
 from sklearn.kernel_approximation import RBFSampler
 from sklearn.preprocessing import MinMaxScaler
-from keras.datasets import cifar10
+from keras.datasets import cifar10, cifar100, fashion_mnist
 from tqdm import tqdm
 from scipy.ndimage.filters import gaussian_filter1d
 
@@ -47,8 +47,7 @@ def concatenate_landscapes(
 
     for i in range(0, numberPartition):
         concatenatedLandscape.append(
-            np.concatenate((splitLandscape1[i], splitLandscape2[i]), axis=0)
-        )
+             np.fmax(splitLandscape1[i], splitLandscape2[i]))
 
     return [np.array(concatenatedLandscape).flatten()]
 
@@ -59,8 +58,11 @@ def compute_persistence_landscape(
     persistenceIntervals: int = 1,
     maxAlphaSquare: float = 1e12,
     filtration: str = ["alphaComplex", "vietorisRips", "tangential"],
-    maxDimensions: int = 3,
-    edgeLength: float = 0.2,
+    maxDimensions: int = 10,
+    edgeLength: float = 0.1,
+    plot: bool = False,
+    smoothen: bool = False,
+    sigma: int = 3,
 ) -> np.ndarray:
     """
         **A function for computing persistence landscapes for 2D images.**
@@ -77,6 +79,9 @@ def compute_persistence_landscape(
         + param **filtration**: alphaComplex, vietorisRips, cech, delaunay, tangential, type `str`.
         + param **maxDimensions**: only needed for VietorisRips, type `int`.
         + param **edgeLength**: only needed for VietorisRips, type `float`.
+        + param **plot**: whether or not to plot, type `bool`.
+        + param **smoothen**: whether or not to smoothen the landscapes, type `bool`.
+        + param **sigma**: smoothing factor for gaussian mixtures, type `int`.
         + return **landscapeTransformed**: persistence landscape, type `np.ndarray`.
     """
 
@@ -108,13 +113,13 @@ def compute_mean_persistence_landscapes(
     persistenceIntervals: int = 1,
     maxAlphaSquare: float = 1e12,
     filtration: str = ["alphaComplex", "vietorisRips", "tangential"],
-    maxDimensions: int = 3,
-    edgeLength: float = 0.2,
+    maxDimensions: int = 10,
+    edgeLength: float = 0.1,
     plot: bool = False,
     tikzplot: bool = False,
     name: str = "persistenceLandscape",
     smoothen: bool = False,
-    sigma: int = 3,
+    sigma: int = 2,
 ) -> np.ndarray:
     """
         **This function computes mean persistence diagrams over 2D datasets.**
@@ -125,10 +130,13 @@ def compute_mean_persistence_landscapes(
         landscape by gaussian filter. A plot can be created with `matplotlib` or as
         another option for scientific reporting with `tikzplotlib`, or both.
 
+        Information: The color scheme has 5 colors defined. Thus 5 homology groups can be
+        displayed in different colors.
+
         + param **data**: data set, type `np.ndarray`.
         + param **resolution**: resolution of persistent homology per group, type `int`.
         + param **persistenceIntervals**: intervals for persistence classes, type `int`.
-        + param **maxAlphaSquare**: max. parameter for delaunay expansion, type `float`.
+        + param **maxAlphaSquare**: max. parameter for Delaunay expansion, type `float`.
         + param **filtration**: `alphaComplex`, `vietorisRips` or `tangential`, type `str`.
         + param **maxDimensions**: maximal dimension of simplices, type `int`.
         + param **edgeLength**: length of simplex edge, type `float`.
@@ -143,83 +151,78 @@ def compute_mean_persistence_landscapes(
     dataSize = dataShape[0]
     elementSize = len(data[0].flatten())
     reshapedData = data[0].reshape((int(elementSize / 2), 2))
-    meanPersistenceLandscape = compute_persistence_landscape(
-        reshapedData,
-        res=resolution,
-        filtration=filtration,
-        persistenceIntervals=persistenceIntervals,
-        maxAlphaSquare=maxAlphaSquare,
-        maxDimensions=maxDimensions,
-        edgeLength=edgeLength,
-    )
 
-    for i in tqdm(range(0, dataShape[0]-1)):
-        reshapedData = data[i].reshape((int(elementSize / 2), 2))
-        persistentLandscape = compute_persistence_landscape(
-            reshapedData,
-            res=resolution,
-            filtration=filtration,
-            persistenceIntervals=persistenceIntervals,
-            maxAlphaSquare=maxAlphaSquare,
-            maxDimensions=maxDimensions,
-            edgeLength=edgeLength,
-        )
-        meanPersistenceLandscape = concatenate_landscapes(
-            meanPersistenceLandscape, persistentLandscape, resolution
-        )
+    for i in tqdm(range(0, dataShape[0])):
+        if i == 0:
+            meanPersistenceLandscape = compute_persistence_landscape(
+                reshapedData,
+                res=resolution,
+                filtration=filtration,
+                persistenceIntervals=persistenceIntervals,
+                maxAlphaSquare=maxAlphaSquare,
+                maxDimensions=maxDimensions,
+                edgeLength=edgeLength,
+            )
+        else:
+            reshapedData = data[i].reshape((int(elementSize / 2), 2))
+            persistentLandscape = compute_persistence_landscape(
+                reshapedData,
+                res=resolution,
+                filtration=filtration,
+                persistenceIntervals=persistenceIntervals,
+                maxAlphaSquare=maxAlphaSquare,
+                maxDimensions=maxDimensions,
+                edgeLength=edgeLength,
+            )
+            meanPersistenceLandscape = concatenate_landscapes(
+                meanPersistenceLandscape, persistentLandscape, resolution
+            )
+
+    xaxis = np.arange(resolution)
+    numberPartition = int(len(meanPersistenceLandscape[0]) / resolution)
+    splittedLandscape = np.split(meanPersistenceLandscape[0], numberPartition)
+    dictLength = len(colorScheme)
+    keys = list(colorScheme)
 
     if plot == True:
-        xaxis = np.arange(resolution)
-        numberPartition = int(len(meanPersistenceLandscape[0]) / resolution)
-        splittedLandscape = np.split(
-            np.array(meanPersistenceLandscape[0]), numberPartition
-        )
-        dictLength = len(colorScheme)
-        keys = list(colorScheme)
-
-        if plot == True:
-            for i in range(0, len(splittedLandscape)):
-                # Iterate the dict by the current element modulo it's length.
-                if smoothen == True:
-                    plt.fill(
-                        xaxis,
-                        gaussian_filter1d(splittedLandscape[i], sigma),
-                        colorScheme[keys[math.ceil(i / dataSize) - 1]],
-                    )
-                else:
-                    plt.fill(
-                        xaxis,
-                        splittedLandscape[i],
-                        colorScheme[keys[math.ceil(i / dataSize) - 1]],
-                    )
-            plt.title("Persistence landscape.")
-            plt.show()
-
-        elif tikzplot == True:  #
-            for i in range(0, len(splittedLandscape)):
-                # Iterate the dict by the current element modulo it's length.
-                if smoothen == True:
-                    plt.fill(
-                        xaxis,
-                        gaussian_filter1d(plittedLandscape[i], sigma),
-                        colorScheme[keys[math.ceil(i / dataSize) - 1]],
-                    )
-                else:
-                    plt.fill(
-                        xaxis,
-                        splittedLandscape[i],
-                        colorScheme[keys[math.ceil(i / dataSize) - 1]],
-                    )
-                plt.title("Persistence landscape.")
-
-            if path.exists("plot"):
-                tikzplotlib.save("plot/" + name + ".tex")
+        for i in range(0, len(splittedLandscape)):
+            # Iterate the dict by the current element modulo it's length.
+            if smoothen == True:
+                plt.fill(
+                    xaxis,
+                    gaussian_filter1d(splittedLandscape[i], sigma),
+                    colorScheme[keys[i%len(keys)]],
+                )
             else:
-                os.mkdir("plot")
-                tikzplotlib.save("plot/" + name + ".tex")
+                plt.fill(
+                    xaxis,
+                    splittedLandscape[i],
+                    colorScheme[keys[i%len(keys)]],
+                )
+        plt.title("Persistence landscape.")
+        plt.show()
+
+    elif tikzplot == True:
+        for i in range(0, len(splittedLandscape)):
+            # Iterate the dict by the current element modulo it's length.
+            if smoothen == True:
+                plt.fill(
+                    xaxis,
+                    gaussian_filter1d(splittedLandscape[i], sigma),
+                    colorScheme[keys[i%len(keys)]],
+                )
+            else:
+                plt.fill(
+                    xaxis,
+                    splittedLandscape[i],
+                    colorScheme[keys[i%len(keys)]],
+                )
+        
+        plt.title("Persistence landscape.")
+        if os.path.exists(os.getcwd() + "/plot") == True:
+            tikzplotlib.save("plot/" + name + ".tex")
+        else:
+            os.mkdir("plot")
+            tikzplotlib.save("plot/" + name + ".tex")
 
     return meanPersistenceLandscape
-
-
-(X, y_train), (x_test, y_test) = cifar10.load_data()
-compute_mean_persistence_landscapes(X[0:1000], filtration="alphaComplex", plot=True, smoothen=True)

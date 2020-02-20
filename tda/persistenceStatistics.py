@@ -39,6 +39,7 @@ def hausd_interval(
         global hausdorff_distance
 
     if pairwiseDist == False:
+
         def hausdorff_distance(subsampleSize: list) -> float:
             """
                 **Distances between the points of data and a random subsample of data of size `m`.**
@@ -60,6 +61,7 @@ def hausd_interval(
         cores.close()
 
     else:
+
         def hausdorff_distance(subsampleSize: list) -> float:
             """
                 **Distances between the points of data and a random subsample of data of size `m`.**
@@ -70,7 +72,7 @@ def hausd_interval(
             I = np.random.choice(dataSize, subsampleSize)
             hausdorffDistance = np.max(
                 [np.min(data[I, j]) for j in np.arange(dataSize) if j not in I]
-                )
+            )
             return hausdorffDistance
 
         with Pool(ncores) as cores:
@@ -103,7 +105,7 @@ def truncated_simplex_tree(simplexTree: np.ndarray, int_trunc: int = 100) -> tup
     simplexTreeTruncatedPersistence = []
 
     for i in range(dimension):
-        dPersistence = simplexTree.persistence_intervals_in_dimension(d)
+        dPersistence = simplexTree.persistence_intervals_in_dimension(dimension)
         j = len(dPersistence)
 
         if j > int_trunc:

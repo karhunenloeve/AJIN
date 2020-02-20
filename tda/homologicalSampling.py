@@ -150,7 +150,3 @@ def sample_torus(
         + return **list**: data points, type `list`.
     """
     return tadasets.torus(n=2000, c=2, a=1, ambient=200, noise=0.2)
-
-swiss_roll = tadasets.swiss_roll(n=2000, r=4, ambient=10, noise=1.2)
-dsphere = tadasets.dsphere(n=1000, d=12, r=3.14, ambient=14, noise=0.14)
-infty_sign = tadasets.infty_sign(n=3000, noise=0.1)

@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
 import numpy as np
-import typing
 
 from multiprocessing import Pool
 from sklearn.neighbors import KDTree
-
+from typing import *
 
 def hausd_interval(
     data: np.ndarray,

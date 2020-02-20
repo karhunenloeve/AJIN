@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 import numpy as np
 import math as mth
 import tadasets
-from typing import List, Set, Dict, Tuple, Optional
+
+from typing import *
 
 def sample_dsphere(
 	dimension: int, 

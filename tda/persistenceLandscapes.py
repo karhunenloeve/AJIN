@@ -15,6 +15,8 @@ from sklearn.preprocessing import MinMaxScaler
 from keras.datasets import cifar10, cifar100, fashion_mnist
 from tqdm import tqdm
 from scipy.ndimage.filters import gaussian_filter1d
+from typing import *
+
 
 colorScheme = {
     "black": "#1A1A1D",

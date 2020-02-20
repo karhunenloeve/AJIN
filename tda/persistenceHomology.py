@@ -4,14 +4,13 @@ import matplotlib.pyplot as plot
 import tikzplotlib as tikz
 import gudhi as gd
 import numpy as np
-import typing
 
-from keras.datasets import cifar10, cifar100, fashion_mnist
-
+from typing import *
 
 def persistent_homology(
     data: np.ndarray,
     display: bool = False,
+    tikzplot: bool = False,
     maxEdgeLength: int = 42,
     maxDimension: int = 5,
     maxAlphaSquare: float = 1e12,
@@ -29,7 +28,6 @@ def persistent_homology(
             points=reshapedData, max_edge_length=maxEdgeLength
         ).create_simplex_tree(max_dimension=maxDimension)
     elif filtration == "alphaComplex":
-        print("Hello world")
         simComplex = gd.AlphaComplex(points=reshapedData).create_simplex_tree(
             max_alpha_square=maxAlphaSquare
         )
@@ -48,10 +46,6 @@ def persistent_homology(
     elif tikzplot == True:
         gd.plot_persistence_diagram(persistenceDiagram)
         plot.title("Persistence landscape.")
-        tikzplotlib.save("persistentHomology_" + filtration + ".tex")
+        tikz.save("persistentHomology_" + filtration + ".tex")
 
     return persistenceDiagram
-
-
-(X, y_train), (x_test, y_test) = cifar100.load_data()
-persistent_homology(X[:1000], filtration="alphaComplex", display=True)

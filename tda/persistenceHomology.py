@@ -15,10 +15,28 @@ def persistent_homology(
     maxDimension: int = 5,
     maxAlphaSquare: float = 1e12,
     homologyCoeffField: int = 3,
-    minPersistence: int = 0,
+    minPersistence: float = 0,
     filtration: str = ["alphaComplex", "vietorisRips", "tangential"],
 ):
+    """
+        **Create uniform random sampling of a d-sphere.**
 
+        This algorithm generates a certain set of normally distributed random variables.
+        Since the multivariate normal distribution of `(x1, ..., xn)` is rotationally symmetrical about the
+        origin, data can be generated on a sphere. The computation time for this algorithm is `O(n * d)`,
+        with `n` being the number of samples and `d` the number of dimensions.
+
+        + param **data**: data, type `np.ndarray`.
+        + param **display**: whether or not to plot the persistence diagram using matplotlib, type `bool`.
+        + param **tikzplot**: whether or not to create a tikz file from persistent homology, type `bool`.
+        + param **maxEdgeLength**: maximal edge length of simplicial complex, type `int`.
+        + param **maxDimension**: maximal dimension of simplicial complex, type `int`.
+        + param **maxAlphaSquare**: alpha square value for Delaunay complex, type `float`.
+        + param **homologyCoeffField**: integers, cyclic moduli integers, rationals enumerated, type `int`.
+        + param **minPersistence**: minimal persistence of homology class, type `float`.
+        + param **filtration**: the used filtration to calculate persistent homology, type `str`.
+        + return **np.ndarray**: data points, type `np.ndarray`.
+    """
     dataShape = data.shape
     elementSize = len(data[0].flatten())
     reshapedData = data[0].reshape((int(elementSize / 2), 2))

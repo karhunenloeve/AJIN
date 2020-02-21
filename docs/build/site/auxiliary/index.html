@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Clustering - Ajin</title>
+  <title>Auxiliary - Ajin</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Clustering";
-    var mkdocs_page_input_path = "cluster.md";
+    var mkdocs_page_name = "Auxiliary";
+    var mkdocs_page_input_path = "auxiliary.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -53,21 +53,9 @@
     <a class="" href="..">Home</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Clustering</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#clustering">clustering</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#ts_gaf_transform">ts_gaf_transform</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../clustering/">Clustering</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -75,9 +63,23 @@
     <a class="" href="../tda/">Topological Data Analysis</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../auxiliary/">Auxiliary</a>
+    <a class="current" href="./">Auxiliary</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#auxiliary">auxiliary</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#aux_iterative_descent">aux_iterative_descent</a></li>
+        
+            <li><a class="toctree-l3" href="#aux_recursive_descent">aux_recursive_descent</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -102,7 +104,7 @@
     
       
     
-    <li>Clustering</li>
+    <li>Auxiliary</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -112,20 +114,31 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="clustering">clustering</h1>
-<h2 id="ts_gaf_transform"><strong><em>ts_gaf_transform</em></strong></h2>
-<pre><code class="python">def ts_gaf_transform(timeseries:numpy.ndarray, upper_bound:float=1.0, lower_bound:float=-1.0) -&gt; tuple
+                <h1 id="auxiliary">auxiliary</h1>
+<h2 id="aux_iterative_descent"><strong><em>aux_iterative_descent</em></strong></h2>
+<pre><code class="python">def aux_iterative_descent(data:numpy.ndarray, function:Callable) -&gt; numpy.ndarray
 </code></pre>
 
-<p><strong>Compute the Gramian Angular Field of a time series.</strong></p>
-<p>The Gramian Angular Field is a bijective transformation of time series data into an image of dimension <code>n+1</code>.
-Inserting an <code>n</code>-dimensional time series gives an <code>(n x n)</code>-dimensional array with the corresponding encoded
-time series data.</p>
+<p><strong>Iterative process an <code>np.ndarray</code> of shape <code>(m,n)</code>.</strong></p>
+<p>This function processes an <code>np.ndarray</code> filled columnwise with time series data. We consider an <code>(m,n)</code>-dimensional
+array and perform the callable over the <code>m</code>th row of the dataset. Our result is an <code>np.ndarray</code> with dimension <code>(m,l)</code>.
+This function treats the row vectors as time series. Therefore the time series must be ordered by the first index <code>m</code>.</p>
 <ul>
-<li>param <strong>timeseries</strong>: time series data, type <code>np.ndarray</code>.</li>
-<li>param <strong>upper_bound</strong>: upper bound for scaling, type <code>float</code>.</li>
-<li>param <strong>lower_bound</strong>: lower bound for scaling, type <code>float</code>.</li>
-<li>return <strong>tuple</strong>: (GAF, phi, r, scaled-series), type <code>tuple</code>.</li>
+<li>param <strong>data</strong>: multidimensional data, type <code>np.ndarray</code>.</li>
+<li>param <strong>function</strong>: callable, type <code>Callable</code>.</li>
+<li>return <strong>proc_data</strong>: all kind of processed data.</li>
+</ul>
+<h2 id="aux_recursive_descent"><strong><em>aux_recursive_descent</em></strong></h2>
+<pre><code class="python">def aux_recursive_descent(data:numpy.ndarray, function:Callable)
+</code></pre>
+
+<p><strong>Recursivly process an <code>np.ndarray</code> until the last dimension.</strong></p>
+<p>This function applies a callable to the very last dimension of a numpy multidimensional array. It is foreseen
+for time series processing expecially in combination with the function <code>ts_gaf_transform</code>.</p>
+<ul>
+<li>param <strong>data</strong>: multidimensional data, type <code>np.ndarray</code>.</li>
+<li>param <strong>function</strong>: callable, type <code>Callable</code>.</li>
+<li>return <strong>function(data)</strong>: all kind of processed data.</li>
 </ul>
               
             </div>
@@ -134,10 +147,8 @@ time series data.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../tda/" class="btn btn-neutral float-right" title="Topological Data Analysis">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../tda/" class="btn btn-neutral" title="Topological Data Analysis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -163,10 +174,8 @@ time series data.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../tda/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../tda/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -16,6 +16,7 @@ from keras.layers import BatchNormalization, Reshape, concatenate
 from keras.layers import Flatten, Cropping2D, Concatenate
 from keras.models import Model
 from keras.losses import kullback_leibler_divergence, mean_squared_error
+from keras.optimizers import Adam
 from keras.datasets import mnist, cifar10, cifar100, boston_housing
 from keras.callbacks import TensorBoard, CSVLogger
 from keras.backend import slice

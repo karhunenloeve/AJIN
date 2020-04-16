@@ -9,14 +9,13 @@ import gudhi.representations
 import tikzplotlib
 import itertools
 import persistenceStatistics as ps
+import tensorflow as tf
 
 from sklearn.kernel_approximation import RBFSampler
 from sklearn.preprocessing import MinMaxScaler
 from keras.datasets import cifar10, cifar100, fashion_mnist
 from tqdm import tqdm
 from scipy.ndimage.filters import gaussian_filter1d
-from typing import *
-
 
 colorScheme = {
     "black": "#1A1A1D",
@@ -186,17 +185,21 @@ def compute_mean_persistence_landscapes(
     dictLength = len(colorScheme)
     keys = list(colorScheme)
 
+    for i in range(0,len(splittedLandscape)):
+        maxima = np.sum(np.r_[1, splittedLandscape[i][1:] < splittedLandscape[i][:-1]] & np.r_[splittedLandscape[i][:-1] < splittedLandscape[i][1:], 1])
+        print("There are " + str(maxima) + " local maxima for the " + str(i) + "-th homology group.")
+
     if plot == True:
         for i in range(0, len(splittedLandscape)):
             # Iterate the dict by the current element modulo it's length.
             if smoothen == True:
-                plt.plot(
+                plt.fill(
                     xaxis,
                     gaussian_filter1d(splittedLandscape[i], sigma),
                     colorScheme[keys[i%len(keys)]],
                 )
             else:
-                plt.plot(
+                plt.fill(
                     xaxis,
                     splittedLandscape[i],
                     colorScheme[keys[i%len(keys)]],

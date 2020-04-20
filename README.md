@@ -3,6 +3,10 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
 1. [Homological sampling](#homologicalSampling)
+	- [Sampling from *d*-sphere](#sample_dsphere)
+	- [Sampling from *d*-ball](#sample_dball)
+	- [Sampling from *d*-torus (cursed)](#sample_dtorus_cursed)
+	- [Sampling from a torus](#sample_torus)
 
 ## homologicalSampling ##
 

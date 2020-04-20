@@ -4,7 +4,7 @@
 
 1. [homologicalSampling][homologicalSampling]
 
-## homologicalSampling
+## homologicalSampling ##
 
 ### sample_dsphere
 ```python

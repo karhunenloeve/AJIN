@@ -1,6 +1,10 @@
-# homologicalSampling
+# Ajin
+[![License](https://img.shields.io/:license-mit-blue.svg)](https://badges.mit-license.org)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
-## sample_dsphere
+## homologicalSampling
+
+### sample_dsphere
 ```python
 sample_dsphere(dimension: int, amount: int, radius: float = 1) -> numpy.ndarray
 ```
@@ -17,7 +21,7 @@ with `n` being the number of samples and `d` the number of dimensions.
 + param **radius**: radius of the d-sphere, type `float`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-## sample_dball
+### sample_dball
 ```python
 sample_dball(dimension: int, amount: int, radius: float = 1) -> numpy.ndarray
 ```
@@ -35,7 +39,7 @@ and `d` the number of dimensions.
 + param **radius**: radius of the d-sphere, type `float`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-## sample_dtorus_cursed
+### sample_dtorus_cursed
 ```python
 sample_dtorus_cursed(dimension: int, amount: int, radii: list) -> numpy.ndarray
 ```
@@ -52,7 +56,7 @@ this is just a prototype for low dimensional sampling
 + param **radii**: radii of the torical spheres, type `list`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-## sample_torus
+### sample_torus
 ```python
 sample_torus(dimension: int, amount: int, radii: list) -> numpy.ndarray
 ```
@@ -69,9 +73,9 @@ this is just a prototype for low dimensional sampling
 + param **radii**: radii of the torical spheres, type `list`.
 + return **list**: data points, type `list`.
 
-# persistenceHomology
+## persistenceHomology
 
-## persistent_homology
+### persistent_homology
 ```python
 persistent_homology(data: numpy.ndarray, plot: bool = False, tikzplot: bool = False, maxEdgeLength: int = 42, maxDimension: int = 10, maxAlphaSquare: float = 1000000000000.0, homologyCoeffField: int = 2, minPersistence: float = 0, filtration: str = ['alphaComplex', 'vietorisRips', 'tangential'])
 ```
@@ -92,9 +96,9 @@ simplicial complex. It can be used for plotting or scientific displaying of pers
 + param **filtration**: the used filtration to calculate persistent homology, type `str`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-# tda.persistenceLandscapes
+## tda.persistenceLandscapes
 
-## concatenate_landscapes
+### concatenate_landscapes
 ```python
 concatenate_landscapes(persLandscape1: numpy.ndarray, persLandscape2: numpy.ndarray, resolution: int) -> list
 ```
@@ -110,7 +114,7 @@ persistent homology groups.
 + param **persLandscape2**: persistence landscape, type `np.ndarray`.
 + return **concatenatedLandscape**: direct sum of persistence landscapes, type `list`.
 
-## compute_persistence_landscape
+### compute_persistence_landscape
 ```python
 compute_persistence_landscape(data: numpy.ndarray, res: int = 1000, persistenceIntervals: int = 1, maxAlphaSquare: float = 1000000000000.0, filtration: str = ['alphaComplex', 'vietorisRips', 'tangential'], maxDimensions: int = 10, edgeLength: float = 0.1, plot: bool = False, smoothen: bool = False, sigma: int = 3) -> numpy.ndarray
 ```
@@ -134,7 +138,7 @@ options for certain filtrations.
 + param **sigma**: smoothing factor for gaussian mixtures, type `int`.
 + return **landscapeTransformed**: persistence landscape, type `np.ndarray`.
 
-## compute_mean_persistence_landscapes
+### compute_mean_persistence_landscapes
 ```python
 compute_mean_persistence_landscapes(data: numpy.ndarray, resolution: int = 1000, persistenceIntervals: int = 1, maxAlphaSquare: float = 1000000000000.0, filtration: str = ['alphaComplex', 'vietorisRips', 'tangential'], maxDimensions: int = 10, edgeLength: float = 0.1, plot: bool = False, tikzplot: bool = False, name: str = 'persistenceLandscape', smoothen: bool = False, sigma: int = 2) -> numpy.ndarray
 ```
@@ -164,9 +168,9 @@ displayed in different colors.
 + param **sigma**: smoothing factor for gaussian mixtures, type `int`.
 + return **meanPersistenceLandscape**: mean persistence landscape, type `np.ndarray`.
 
-# persistenceStatistics
+## persistenceStatistics
 
-## hausd_interval
+### hausd_interval
 ```python
 hausd_interval(data: numpy.ndarray, confidenceLevel: float = 0.95, subsampleSize: int = -1, subsampleNumber: int = 1000, pairwiseDist: bool = False, leafSize: int = 2, ncores: int = 2) -> float
 ```
@@ -186,7 +190,7 @@ the Hausdorff distance between the points.
 + param **ncores**: number of cores for parallel computing, type `int`.
 + return **confidence**: the confidence to be a persistent homology class, type `float`.
 
-## truncated_simplex_tree
+### truncated_simplex_tree
 ```python
 truncated_simplex_tree(simplexTree: numpy.ndarray, int_trunc: int = 100) -> tuple
 ```
@@ -201,9 +205,9 @@ persistence tree. Speeds up computation on large scale data sets.
 + return **simplexTreeTruncatedPersistence**: truncated simplex tree, type `np.ndarray`.
 
 
-# imageAutoencode
+## imageAutoencode
 
-## take_out_element
+### take_out_element
 ```python
 take_out_element(k: tuple, r) -> tuple
 ```
@@ -214,7 +218,7 @@ take_out_element(k: tuple, r) -> tuple
 + param **r**: value to be removed, type `int, float, string, None`.
 + return **k2**: cropped tuple object, type `tuple`.
 
-## primeFactors
+### primeFactors
 ```python
 primeFactors(n)
 ```
@@ -224,7 +228,7 @@ primeFactors(n)
 + param **n**: an integer, type `int`.
 + return **factors**: a list of prime factors, type `list`.
 
-## load_data_keras
+### load_data_keras
 ```python
 load_data_keras(dimensions: tuple, factor: float = 255.0, dataset: str = 'mnist') -> tuple
 ```
@@ -242,7 +246,7 @@ The shapes: `mnist (28,28,1)`, `cifar10 (32,32,3)`, `cifar100 (32,32,3)`
 + param **dataset**: keras dataset, default is `mnist`,type `str`.
 + return **X_train, X_test, input_image**: , type `tuple`.
 
-## add_gaussian_noise
+### add_gaussian_noise
 ```python
 add_gaussian_noise(data: numpy.ndarray, noise_factor: float = 0.5, mean: float = 0.0, std: float = 1.0) -> numpy.ndarray
 ```
@@ -259,7 +263,7 @@ noisy points added.
 + param **std**: standard deviation, type `float`.
 + return **x_train_noisy**: noisy data, type `np.ndarray`.
 
-## crop_tensor
+### crop_tensor
 ```python
 crop_tensor(dimension: int, start: int, end: int) -> Callable
 ```
@@ -276,7 +280,7 @@ This procedure works up to dimension `4`.
 + param **end**: ending index for cropping, type `int`.
 + return **Lambda(func)**: Lambda function on the tensor, type `Callable`.
 
-## convolutional_group
+### convolutional_group
 ```python
 convolutional_group(_input: numpy.ndarray, filterNumber: int, alpha: float = 5.5, kernelSize: tuple = (2, 2), kernelInitializer: str = 'uniform', padding: str = 'same', useBias: bool = True, biasInitializer: str = 'zeros')
 ```
@@ -297,7 +301,7 @@ the padding is set to same, to avoid difficulties with convolution.
 + param **biasInitializer**: initializing distribution of the bias values, type `str`.
 + return **data**: processed data by neural layers, type `np.ndarray`.
 
-## loop_group
+### loop_group
 ```python
 loop_group(group: Callable, groupLayers: int, element: numpy.ndarray, filterNumber: int, kernelSize: tuple, useBias: bool = True, kernelInitializer: str = 'uniform', biasInitializer: str = 'zeros') -> numpy.ndarray
 ```
@@ -317,7 +321,7 @@ group of layers using the same parameter set as `2D` convolution.
 + param **useBias**: whether or not to use the bias term throughout the network, type `bool`.
 + param **biasInitializer**: initializing distribution of the bias values, type `str`.
 
-## invertible_layer
+### invertible_layer
 ```python
 invertible_layer(data: numpy.ndarray, alpha: float = 5.5, kernelSize: tuple = (2, 2), kernelInitializer: str = 'uniform', groupLayers: int = 6, filterNumber: int = 2, croppingFactor: int = 4, useBias: bool = True, biasInitializer: str = 'zeros') -> numpy.ndarray
 ```
@@ -338,7 +342,7 @@ subnetworks, trained during learning process.
 + param **biasInitializer**: initializing distribution of the bias values, type `str`.
 + return **data**: processed data, type `np.ndarray`.
 
-## invertible_subspace_dimension2
+### invertible_subspace_dimension2
 ```python
 invertible_subspace_dimension2(units: int)
 ```
@@ -351,7 +355,7 @@ according to an embedding with the same dimension, represented by a `2D` array.
 + param **units**: , type `int`.
 + return **embedding**: , type `tuple`.
 
-## invertible_subspace_autoencoder
+### invertible_subspace_autoencoder
 ```python
 invertible_subspace_autoencoder(data: numpy.ndarray, units: int, invertibleLayers: int, alpha: float = 5.5, kernelSize: tuple = (2, 2), kernelInitializer: str = 'uniform', groupLayers: int = 6, filterNumber: int = 2, useBias: bool = True, biasInitializer: str = 'zeros')
 ```
@@ -376,9 +380,9 @@ meant to be part of a productive environment.
 + param **filterNumber**: an integer factor for each convolutional layer, type `int`.
 + return **output**: an output layer for keras neural networks, type `np.ndarray`.
 
-# imageTransform
+## imageTransform
 
-## gramian_angular_field
+### gramian_angular_field
 ```python
 gramian_angular_field(timeseries: numpy.ndarray, upper_bound: float = 1.0, lower_bound: float = -1.0) -> tuple
 ```
@@ -395,9 +399,9 @@ time series data.
 + return **tuple**: (GAF, phi, r, scaled-series), type `tuple`.
 
 
-# auxiliary
+## auxiliary
 
-## ***aux_iterative_descent***
+### ***aux_iterative_descent***
 ```python
 def aux_iterative_descent(data:numpy.ndarray, function:Callable) -> numpy.ndarray
 ```
@@ -412,7 +416,7 @@ This function treats the row vectors as time series. Therefore the time series m
 + param **function**: callable, type `Callable`.
 + return **proc_data**: all kind of processed data.
 
-## ***aux_recursive_descent***
+### ***aux_recursive_descent***
 ```python
 def aux_recursive_descent(data:numpy.ndarray, function:Callable)
 ```
@@ -427,18 +431,18 @@ for time series processing expecially in combination with the function `ts_gaf_t
 + return **function(data)**: all kind of processed data.
 
 
-# Requirements
+## Requirements
 For some dependencies of our library we need to have installed the `gcc` compiler. Please install `gcc` using one of the following commands for the linux distributions *Arch, Solus4* or *Ubuntu*, or another package manager suitable for your operating system and/or distribution:
 ```bash
-# Archlinux
+## Archlinux
 sudo pacman -S gcc
 
-# Solus4
+## Solus4
 sudo eopkg install gcc
-# These are the requirements to run gcc for Solus4
+## These are the requirements to run gcc for Solus4
 sudo eopkg install -c system.devel
 
-# Ubuntu
+## Ubuntu
 sudo apt update
 sudo apt install build-essential
 sudo apt-get install python3-dev
@@ -453,13 +457,13 @@ pip3 install tadasets
 pip3 install tensorflow
 pip3 install keras
 pip3 install matplotlib
-pip3 install tikzplotlib # Converts matplotlib to tikz pictures.
-pip3 install hdbscan # Works only with gcc installed.
+pip3 install tikzplotlib ## Converts matplotlib to tikz pictures.
+pip3 install hdbscan ## Works only with gcc installed.
 ```
 We'll need the Gudhi Python library. A good way to install Gudhi is to utilize the Anaconda environment. This installation requires a non default channel called `conda-forge`. You can use one of the following commands:
 ```
-# Install Gudhi, easiest installation with Anaconda.
-# Gudhi is a library to compute persistent homology.
+## Install Gudhi, easiest installation with Anaconda.
+## Gudhi is a library to compute persistent homology.
 conda install -c conda-forge gudhi
 conda install -c conda-forge/label/cf201901 gudhi 
 ```

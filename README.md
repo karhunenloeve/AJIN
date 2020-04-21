@@ -8,6 +8,32 @@
 	- [Sampling from *d*-ball](#sample_dball)
 	- [Sampling from *d*-torus (cursed)](#sample_dtorus_cursed)
 	- [Sampling from a torus](#sample_torus)
+2. [Persistent homology calculation](#persistenceHomology)
+	- [Compute persistence diagrams](#persistent_homology)
+3. [Persistence landscapes](#persistenceLandscapes)
+	- [Concatenated multiple persistence landscapes](#concatenate_landscapes)
+	- [Compute persistence landscapes](#compute_persistence_landscape)
+	- [Compute mean persistence landscapes](#compute_mean_persistence_landscapes)
+4. [Persistence statistics](#persistenceStatistics)
+	- [Hausdorff intervall](#hausd_interval)
+	- [Truncated simplex trees](#truncated_simplex_tree)
+5. [Autoencoders for image processing](#imageAutoencode)
+	- [Remove tensor elements](#take_out_element)
+	- [Get prime factors](#primeFactors)
+	- [Load example Keras datasets](#load_data_keras)
+	- [Add gaussian noise to data](#add_gaussian_noise)
+	- [Crop tensor elements](#crop_tensor)
+	- [Greate a group of convolutional layers](#convolutional_group)
+	- [Loop over a group of convolutional layers](#loop_group)
+	- [Invertible Keras neural network layer](#loop_group)
+	- [Convert dimensions into 2D-convolution](#invertible_subspace_dimension2)
+	- [Embedded invertible autoencoder model](#invertible_subspace_autoencoder)
+6. [Image transformations](#imageTransform)
+	- [Compute gramian angular fields](#gramian_angular_field)
+6. [Auxiliary](#imageTransform)
+	- [Iterative descent](#iterative_descent)
+	- [Recursive descent](#recursive_descent)
+7. [Requirements](#Requirements)
 
 ## homologicalSampling ##
 
@@ -103,7 +129,7 @@ simplicial complex. It can be used for plotting or scientific displaying of pers
 + param **filtration**: the used filtration to calculate persistent homology, type `str`.
 + return **np.ndarray**: data points, type `np.ndarray`.
 
-## tda.persistenceLandscapes
+## persistenceLandscapes
 
 ### concatenate_landscapes
 ```python
@@ -408,9 +434,9 @@ time series data.
 
 ## auxiliary
 
-### ***aux_iterative_descent***
+### ***iterative_descent***
 ```python
-def aux_iterative_descent(data:numpy.ndarray, function:Callable) -> numpy.ndarray
+def iterative_descent(data:numpy.ndarray, function:Callable) -> numpy.ndarray
 ```
 
 **Iterative process an `np.ndarray` of shape `(m,n)`.**
@@ -423,9 +449,9 @@ This function treats the row vectors as time series. Therefore the time series m
 + param **function**: callable, type `Callable`.
 + return **proc_data**: all kind of processed data.
 
-### ***aux_recursive_descent***
+### ***recursive_descent***
 ```python
-def aux_recursive_descent(data:numpy.ndarray, function:Callable)
+def recursive_descent(data:numpy.ndarray, function:Callable)
 ```
 
 **Recursivly process an `np.ndarray` until the last dimension.**

@@ -1,6 +1,9 @@
 # Ajin
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://badges.mit-license.org)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+This package is named after the sixteenth letter in the Hebrew alphabet *ajin* or *ayin*, which has the numerical value 70 and whose checksum is the prime number 7, my favourite number.
+
+The package contains functions written in Python for the calculation of persistent homology on point sets. In particular, models of machine learning are embedded which have been experimentally tested in conjunction with topological methods. The neural networks are implemented as functions and can be transformed into very different architectures using appropriate parameters.
 
 # Contents
 1. [Homological sampling](#homologicalSampling)

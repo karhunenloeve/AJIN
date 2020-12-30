@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://badges.mit-license.org)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
-This package is named after the sixteenth letter in the Hebrew alphabet *ajin* or *ayin*, which has the numerical value 70 and whose checksum is the prime number 7, my favourite number. Reeses are my favorite peanut butter cups, which is why the title means nothing more than seven of my favorite sweets. In fact, this package aims to deploy seven core functionalities with nice add-ons around loading and pre-processing data in the context of topological data analysis. However, it is so far more of a collection than a publishable package for Python.
+This package is named after the sixteenth letter in the Hebrew alphabet *ajin* or *ayin*, which has the numerical value 70 and whose checksum is the prime number 7, my favourite number. Reeses are my favourite peanut butter cups, which is why the title means nothing more than seven of my favorite sweets. In fact, this package aims to deploy seven core functionalities with nice add-ons around loading and pre-processing data in the context of topological data analysis. However, it is so far more of a collection than a publishable package for Python.
 
 The package contains functions written in Python for the calculation of persistent homology on point sets. In particular, models of machine learning are embedded which have been experimentally tested in conjunction with topological methods. The neural networks are implemented as functions and can be transformed into very different architectures using appropriate parameters.
 
